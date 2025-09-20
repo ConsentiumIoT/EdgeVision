@@ -1,5 +1,4 @@
-#ifdef ESP32_CAM
-    #include "EdgeVision.h"
+#include "EdgeVision.h"
     EdgeVision::EdgeVision() : server(STREAM_PORT) {  // initialize with port 5000
     }
 
@@ -137,4 +136,3 @@
     void EdgeVision::keepServerAlive() {
         server.handleClient();
     }
-#endif // ESP32_CAM

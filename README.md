@@ -1,60 +1,72 @@
-# EdgeSense
+# EdgeVision
 
-**EdgeSense** is a modular, Arduino-compatible library developed by **Consentium IoT** for ESP32-based boards. It enables high-performance, real-time data logging from a wide range of edge sensors, making it ideal for edge AI and TinyML workflows.
+**EdgeVision** is a modular, Arduino-compatible library by **Consentium IoT** for ESP32-based boards, enabling high-performance, real-time video streaming and image capture from edge cameras. It is ideal for edge AI, TinyML, surveillance, and visual monitoring workflows.
 
 ---
 
 ## ⚡ Quick Start
 
-To use EdgeSense in your Arduino sketch, simply include the main header:
+To use EdgeVision in your Arduino sketch, simply include the main header:
 
 ```cpp
-#include <EdgeSense.h>
+#include <EdgeVision.h>
 ```
 
-This single include gives you access to all core components, such as `EdgeStream`, `EdgeSensor`, and `EdgeVision`:
+Example usage for live camera streaming:
 
 ```cpp
-#include <EdgeSense.h>
+#include <EdgeVision.h>
 
-EdgeStream stream;
+const char* ssid = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+EdgeVision edgeVision;
 
 void setup() {
-  stream.begin();
+  Serial.begin(115200);
+  edgeVision.initWiFi(ssid, password);
+  edgeVision.initCamera();
+  edgeVision.startCameraServer();
+}
+
+void loop() {
+  edgeVision.keepServerAlive();
 }
 ```
 
 ---
 
-## 🔧 Supported Sensor Modes
+## 📷 Features
 
-- 📷 **Image Logging** using ESP32-CAM or OV2640-compatible modules  
-- 🎤 **Audio Capture** using I2S microphones (e.g., INMP441)  
-- 📊 **General Sensor/Data Logging** (analog/digital sensors, I2C, etc.) to SD card or flash memory  
-
----
-
-## 🚀 Features
-
-- Modular components for image, audio, and sensor data capture  
-- Lightweight and optimized for ESP32 platforms  
-- Supports real-time and offline data collection  
-- Seamless integration with [EdgeModelKit](https://github.com/ConsentiumIoT/edgemodelkit)  
-- Ideal for TinyML, fall detection, activity recognition, and field monitoring use-cases  
+- **Live MJPEG Video Streaming** over HTTP (LAN)
+- **Image Capture** and storage to SD card or flash
+- **Easy Wi-Fi Setup** for ESP32-CAM and compatible boards
+- **Modular API** for rapid prototyping and deployment
+- **Optimized for ESP32** (AI Tinkerer, Consentium EdgeVision, and similar boards)
+- **Ideal for**: Visual inference, surveillance, remote monitoring, and TinyML vision projects
 
 ---
 
-## 📚 Documentation & Tutorials
+## 🧪 Example Sketches
 
-- 📘 Library Docs: [https://docs.consentiumiot.com](https://docs.consentiumiot.com)  
-- 🧠 Model Training Toolkit: [EdgeModelKit on GitHub](https://github.com/ConsentiumIoT/edgemodelkit)  
-- 🧪 Example Sketches and Workflows: See `examples/` folder in this repo  
+Find ready-to-use examples in the `examples/` folder, such as:
+
+- `ImageLogger`: Stream live video to your browser
+- `Snapshot`: Capture and save images on demand
 
 ---
 
-## 🛠️ Supported Architectures
+## 📚 Documentation
 
-- ✅ `esp32` (Tested on ESP32 DevKit v1, Consentium Nexus/EdgeVision boards)
+- 📘 Library Docs: [https://docs.consentiumiot.com](https://docs.consentiumiot.com)
+- 🧪 Example Workflows: See `examples/` folder
+
+---
+
+## 🛠️ Supported Hardware
+
+- ✅ ESP32-CAM (AI Tinkerer, Consentium EdgeVision, and OV2640-compatible modules)
+- ✅ ESP32 DevKit (with camera modules)
 
 ---
 
@@ -68,9 +80,9 @@ For feature requests, bug reports, or integration help:
 ## 📝 License
 
 **MIT License**  
-© 2025 Consentium IoT Labs Pvt. Ltd.  
+© 2025 Consentium IoT.  
 Redistribution and use in source and binary forms must retain this header.
 
 ---
 
-> Empowering smart sensing at the edge — built by [Consentium IoT](https://www.consentiumiot.com)
+> Empowering smart vision at the edge — built by [Consentium IoT](https://www.consentiumiot.com)
